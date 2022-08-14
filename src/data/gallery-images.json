@@ -1,0 +1,29 @@
+{
+  "categories": [
+    {
+      "src": "/food/food-img-2.jpg",
+      "title": "Food",
+      "url": "/gallery/food"
+    },
+    {
+      "src": "/people/people-img-1.jpg",
+      "title": "People",
+      "url": "/gallery/people"
+    },
+    {
+      "src": "/",
+      "title": "Places",
+      "url": "/gallery/places"
+    },
+    {
+      "src": "/",
+      "title": "Market",
+      "url": "/gallery/market"
+    },
+    {
+      "src": "/",
+      "title": "Beach",
+      "url": "/gallery/beach"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "categories": [
+    {
+      "src": "/food/food-img-1.jpg",
+      "title": "Bread",
+      "url": "/gallery/food/bread"
+    },
+    {
+      "src": "/food/food-img-2.jpg",
+      "title": "Pasta",
+      "url": "/gallery/food/pasta"
+    },
+    {
+      "src": "/food/food-img-4.jpg",
+      "title": "Fruit",
+      "url": "/gallery/food/fruit"
+    },
+    {
+      "src": "/food/food-img-5.jpg",
+      "title": "Fish",
+      "url": "/gallery/food/fish"
+    }
+  ],
+  "bread": [
+    {
+      "src": "/food/food-img-1.jpg"
+    }
+  ],
+  "pasta": [
+    {
+      "src": "/food/food-img-2.jpg"
+    }
+  ],
+  "fruit": [
+    {
+      "src": "/food/food-img-3.jpg"
+    },
+    {
+      "src": "/food/food-img-4.jpg"
+    }
+  ],
+  "meat": [],
+  "fish": [
+    {
+      "src": "/food/food-img-5.jpg"
+    }
+  ]
+}
