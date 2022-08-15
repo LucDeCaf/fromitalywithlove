@@ -1,12 +1,12 @@
 import Gallery from "../../../components/Gallery";
 import images from "../../../data/food-images.json"
 
-function FishGallery() {
+function MeatGallery() {
   return (
     <main>
-      <Gallery title="Fish" images={images.fish} />
+      <Gallery title="Meat" images={images.meat} />
     </main>
   )
 }
 
-export default FishGallery;
+export default MeatGallery;

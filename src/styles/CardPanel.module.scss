@@ -1,4 +1,5 @@
 .cardImage img {
   object-fit: cover;
-  aspect-ratio: 1 / 1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
