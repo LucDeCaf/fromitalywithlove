@@ -17,8 +17,8 @@
     },
     {
       "src": "/food/food-img-5.jpg",
-      "title": "Fish",
-      "url": "/gallery/food/fish"
+      "title": "Meat",
+      "url": "/gallery/food/meat"
     }
   ],
   "bread": [
@@ -39,8 +39,7 @@
       "src": "/food/food-img-4.jpg"
     }
   ],
-  "meat": [],
-  "fish": [
+  "meat": [
     {
       "src": "/food/food-img-5.jpg"
     }
