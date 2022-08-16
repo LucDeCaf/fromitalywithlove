@@ -8,10 +8,10 @@ export default function SubGallery({ pageId }) {
   const usedImages = foodImages[pageId];
 
   return (
-    <>
+    <main>
       <Heading>{pageTitle}</Heading>
       <Gallery images={usedImages} />
-    </>
+    </main>
   );
 }
 
