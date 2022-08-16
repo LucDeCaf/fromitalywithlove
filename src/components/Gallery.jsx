@@ -2,7 +2,6 @@ import styles from "../styles/Gallery.module.scss";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Heading from "./Heading";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 
@@ -31,7 +30,6 @@ function Gallery(props) {
 
   return (
     <>
-      {props.title && <Heading>{props.title}</Heading>}
       <Container fluid="md">
         <Row xs="1" sm="2">
           {imageElements}
