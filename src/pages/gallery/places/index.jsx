@@ -1,10 +1,12 @@
+import Heading from "../../../components/Heading";
 import Gallery from "../../../components/Gallery";
-import images from "../../../data/places-images.json";
+import placeImages from "../../../data/places-images.json";
 
 function PlacesGallery() {
   return (
     <main>
-      <Gallery title="Places" images={images.categories} />
+      <Heading>Places</Heading>
+      <Gallery title="Places" images={placeImages} />
     </main>
   )
 }
