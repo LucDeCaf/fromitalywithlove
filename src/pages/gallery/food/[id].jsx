@@ -1,11 +1,16 @@
 import Heading from "../../../components/Heading";
+import Gallery from "../../../components/Gallery";
+import foodImages from "../../../data/food-images.json";
 
-export default function SubGallery(props) {
-  const pageTitle = props.pageId.toUpperCase();
-  
+export default function SubGallery({ pageId }) {
+  // Capitalize the first letter in the page title
+  const pageTitle = pageId.slice(0, 1).toUpperCase() + pageId.slice(1);
+  const usedImages = foodImages[pageId];
+
   return (
     <>
       <Heading>{pageTitle}</Heading>
+      <Gallery images={usedImages} />
     </>
   );
 }
