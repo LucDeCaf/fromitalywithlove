@@ -29,7 +29,7 @@ const Page: NextPage = () => {
 
   function onSubmit(data: any) {
     const formattedData = formatData(data);
-    fetch("http://localhost:3000/api/images/post", {
+    fetch("https://fromitalywithlove-git-testing-ldecafmeyer-gmailcom.vercel.app/api/images/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

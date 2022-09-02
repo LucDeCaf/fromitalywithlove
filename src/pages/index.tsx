@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/images/get")
+    fetch("https://fromitalywithlove-git-testing-ldecafmeyer-gmailcom.vercel.app/api/images/get")
       .then((res) => res.json())
       .then((data) => setImages(data.data));
   }, []);
