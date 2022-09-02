@@ -31,7 +31,7 @@ const CardPanel: FC<Props> = (props) => {
           <Card.Body>
             {image.title && <Card.Title>{image.title}</Card.Title>}
             {image.desc && <Card.Text>{image.desc}</Card.Text>}
-            {image.links !== [] &&
+            {image.links.length !== 0 &&
               image.links.map((imgLink) => (
                 <Link href={imgLink.url} key={nanoid()}>
                   <Card.Link>{imgLink.text}</Card.Link>
