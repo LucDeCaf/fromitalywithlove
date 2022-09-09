@@ -39,6 +39,7 @@ function FinalNavbar() {
             <Nav.Link href="/blogs">Blog</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/visit/booking">Book A Visit</Nav.Link>
+            <Nav.Link href="/plantastic">Plantastic</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
