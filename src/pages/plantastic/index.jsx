@@ -37,7 +37,7 @@ export default function Page() {
         </h1>
         <Row md={3} xs={1} className="mb-4">
           <Photo src="/plantastic/swakopmundblack2-before.jpg" title="Before" />
-          <Photo src="/plantastic/swakopmundblack2-after.jpg" title="After" />
+          <Photo src="/plantastic/swakopmundblack2-after.JPG" title="After" />
           {isLoaded ? (
             <Col>
               <h1 className={styles.imgTitle}>Location</h1>

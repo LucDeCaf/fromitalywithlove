@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }) {
     <SSRProvider>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>From Italy, With Love</title>
       </Head>
       <FinalNavbar />
       <Component {...pageProps} />
