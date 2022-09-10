@@ -2,13 +2,13 @@ import Heading from "../../components/Heading";
 import { Container, Row, Col } from "react-bootstrap";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import Image from "next/image";
-import styles from "../../styles/PlantasticPage.module.scss";
+import { nanoid } from "nanoid";
 
 function Photo(props) {
   return (
     <div>
       <Col>
-        <h1 className={styles.imgTitle}>{props.title}</h1>
+        <h1 className="text-secondary">{props.title}</h1>
         <Image
           src={props.src}
           alt={props.title + " image"}
@@ -29,18 +29,16 @@ export default function Page() {
   const bagCoordinates = { lat: -22.593586, lng: 14.533088 };
 
   return (
-    <main className={styles.page}>
+    <main>
       <Heading>Plantastic</Heading>
-      <Container>
-        <h1 className={styles.bagTitle}>
-          SwakopmundBlack2
-        </h1>
+      <Container className="pb-4">
+        <h1 className="text-primary">SwakopmundBlack2</h1>
         <Row md={3} xs={1} className="mb-4">
           <Photo src="/plantastic/swakopmundblack2-before.jpg" title="Before" />
           <Photo src="/plantastic/swakopmundblack2-after.JPG" title="After" />
           {isLoaded ? (
             <Col>
-              <h1 className={styles.imgTitle}>Location</h1>
+              <h1 className="text-secondary">Location</h1>
               <GoogleMap
                 zoom={10}
                 center={bagCoordinates}
@@ -56,25 +54,34 @@ export default function Page() {
           )}
         </Row>
         <Row>
-          <p className={styles.bottomText}>
-            <strong>
-              Date: 2022-07-17
-              <br />
-              Marika: MI-1232
-              <br />
-              Black bag
-              <br />
-            </strong>
-            Location:
+          <p className="text-info">
+            Date picked up: 2022-07-17
             <br />
             Latitude: -22.593586
             <br />
             Longitude: 14.533088
             <br />
-            <strong>
-              <em>This one is for desert Landrover Man</em>
-            </strong>
+            Picked up by: Marika (MI-1232), Black bag
+            <br />
+            <em>This one is for desert Landrover Man</em>
           </p>
+        </Row>
+        <h1 className="text-secondary">Additional Photos</h1>
+        <Row xs={1}>
+          {[
+            "/plantastic/additional-photo-1.JPG",
+          ].map((src) => (
+            <Col key={nanoid()}>
+              <Image
+                src={src}
+                alt="Additional Photo 1"
+                layout="responsive"
+                objectFit="cover"
+                width={1}
+                height={1}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
     </main>
