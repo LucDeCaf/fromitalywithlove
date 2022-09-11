@@ -1,13 +1,20 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import styles from "../styles/CardPanel.module.scss";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 
-function CardPanel(props) {
-  const cards = props.images.map((image) => (
+interface CardType {
+  src: string;
+  title: string;
+  url?: string;
+}
+
+interface Props {
+  images: CardType[];
+}
+
+const CardPanel = ({ images }: Props): JSX.Element => {
+  const cards = images.map((image) => (
     <Col key={nanoid()} className="mb-4">
       <Card border="secondary">
         <a className={styles.cardImage} href={image.url}>

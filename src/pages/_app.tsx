@@ -1,10 +1,11 @@
 import Head from "next/head";
 import FinalNavbar from "../components/FinalNavbar";
 import { SSRProvider } from "react-bootstrap";
+import { AppProps } from "next/app";
 import "../styles/global.scss";
 import "../styles/custom-bootstrap.scss";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SSRProvider>
       <Head>

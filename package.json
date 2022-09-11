@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-google-maps/api": "^2.12.2",
     "bootstrap": "^5.2.0",
+    "firebase": "^9.9.4",
     "nanoid": "^4.0.0",
     "next": "12.2.5",
     "node-sass": "^7.0.1",
@@ -20,6 +21,7 @@
     "sass": "^1.54.4"
   },
   "devDependencies": {
+    "@types/node": "^18.7.16",
     "eslint": "8.22.0",
     "eslint-config-next": "12.2.5"
   }

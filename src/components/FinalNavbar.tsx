@@ -1,9 +1,6 @@
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
-function FinalNavbar() {
+const FinalNavbar = (): JSX.Element => {
   return (
     <Navbar bg="light" expand="md" sticky="top" className="mb-3">
       <Container>
@@ -13,13 +10,13 @@ function FinalNavbar() {
         <Navbar.Collapse id="nav-menu">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <NavDropdown href="#" title="Gallery" id="gallery-dropdown">
+            <NavDropdown title="Gallery" id="gallery-dropdown">
               <NavDropdown.Item href="/gallery/food">Food</NavDropdown.Item>
               <NavDropdown.Item href="/gallery/places">Places</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/gallery/">More...</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown href="#" title="Virtual Visit" id="visit-dropdown">
+            <NavDropdown title="Virtual Visit" id="visit-dropdown">
               <NavDropdown.Item href="/visit/atavola">
                 A Tavola
               </NavDropdown.Item>
@@ -45,6 +42,6 @@ function FinalNavbar() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default FinalNavbar;

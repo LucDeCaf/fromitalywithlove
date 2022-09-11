@@ -4,14 +4,14 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 
-function Photo(props) {
+const Photo = ({ title, src }: { title: string; src: string }): JSX.Element => {
   return (
     <div>
       <Col>
-        <h1 className="text-secondary">{props.title}</h1>
+        <h1 className="text-secondary">{title}</h1>
         <Image
-          src={props.src}
-          alt={props.title + " image"}
+          src={src}
+          alt={title + " image"}
           layout="responsive"
           width={1}
           height={1}
@@ -20,11 +20,11 @@ function Photo(props) {
       </Col>
     </div>
   );
-}
+};
 
 export default function Page() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.MAPS_API_KEY,
+    googleMapsApiKey: process.env.MAPS_API_KEY!,
   });
   const bagCoordinates = { lat: -22.593586, lng: 14.533088 };
 
@@ -68,20 +68,16 @@ export default function Page() {
         </Row>
         <h1 className="text-secondary">Additional Photos</h1>
         <Row xs={1}>
-          {[
-            "/plantastic/additional-photo-1.JPG",
-          ].map((src) => (
-            <Col key={nanoid()}>
-              <Image
-                src={src}
-                alt="Additional Photo 1"
-                layout="responsive"
-                objectFit="cover"
-                width={1}
-                height={1}
-              />
-            </Col>
-          ))}
+          <Col key={nanoid()}>
+            <Image
+              src="/plantastic/additional-photo-1.JPG"
+              alt="Additional Photo 1"
+              layout="responsive"
+              objectFit="cover"
+              width={1}
+              height={1}
+            />
+          </Col>
         </Row>
       </Container>
     </main>

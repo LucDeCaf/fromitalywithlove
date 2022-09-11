@@ -4,12 +4,20 @@ import Image from "next/image";
 import { nanoid } from "nanoid";
 import styles from "../styles/ImageSlider.module.scss";
 
-function ImageSlider(props) {
+interface ImageType {
+  src: string;
+}
+
+interface Props {
+  images: ImageType[];
+}
+
+const ImageSlider = ({ images }: Props): JSX.Element => {
   const windowWidth = useWindowSize().width;
   const smallScreenThreshold = 576;
   const largeScreenThreshold = 992;
 
-  const carouselItems = props.images.map((image) => (
+  const carouselItems = images.map((image) => (
     <Carousel.Item key={nanoid()}>
       <Image
         className={styles.carouselItem}
@@ -33,8 +41,8 @@ function ImageSlider(props) {
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
+    width: null,
+    height: null,
   });
   useEffect(() => {
     function handleResize() {

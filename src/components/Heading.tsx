@@ -1,10 +1,14 @@
 import Hr from "./Hr";
 
-function Heading(props) {
+interface Props {
+  children: string;
+}
+
+const Heading = ({ children }: Props): JSX.Element => {
   return (
     <>
       <h1 className="text-center text-info display-3 font-weight-bold">
-        {props.children}
+        {children}
       </h1>
       <Hr />
     </>

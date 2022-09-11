@@ -1,8 +1,6 @@
 import Hr from "../components/Hr";
 import ImageSlider from "../components/ImageSlider";
 import CardPanel from "../components/CardPanel";
-import foodImages from "../data/food-images.json";
-import carouselImages from "../data/carousel-images.json";
 
 function Home() {
   return (
@@ -11,8 +9,8 @@ function Home() {
         From Italy, With Love
       </h1>
       <Hr />
-      <ImageSlider images={carouselImages.categories} />
-      <CardPanel images={foodImages.categories} />
+      {/* <ImageSlider images={[]} />
+      <CardPanel images={[]} /> */}
     </main>
   );
 }
