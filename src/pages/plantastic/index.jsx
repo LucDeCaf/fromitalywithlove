@@ -1,6 +1,6 @@
 import Heading from "../../components/Heading";
 import { Container, Row, Col } from "react-bootstrap";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 
@@ -24,7 +24,7 @@ function Photo(props) {
 
 export default function Page() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyA4SI12aB8XY7TR0L2WCJW-sOyQyCwgMYA",
+    googleMapsApiKey: process.env.MAPS_API_KEY,
   });
   const bagCoordinates = { lat: -22.593586, lng: 14.533088 };
 
@@ -44,7 +44,7 @@ export default function Page() {
                 center={bagCoordinates}
                 mapContainerStyle={{ width: "100%", height: "26rem" }}
               >
-                <Marker position={bagCoordinates} />
+                <MarkerF position={bagCoordinates} />
               </GoogleMap>
             </Col>
           ) : (
