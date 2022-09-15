@@ -4,31 +4,36 @@ import Image from "next/image";
 import { nanoid } from "nanoid";
 
 interface CardType {
-  src: string;
-  title: string;
+  downloadUrl: string;
+  label: string;
+  desc: string;
   url?: string;
 }
 
 interface Props {
   images: CardType[];
+  img?: boolean;
 }
 
-const CardPanel = ({ images }: Props): JSX.Element => {
+const CardPanel = ({ images, img }: Props): JSX.Element => {
   const cards = images.map((image) => (
     <Col key={nanoid()} className="mb-4">
       <Card border="secondary">
         <a className={styles.cardImage} href={image.url}>
           <Image
-            src={image.src}
-            alt={`image of ${image.title}`}
+            src={image.downloadUrl}
+            alt={`image of ${image.label}`}
             layout="responsive"
             width={0}
             height={0}
           />
         </a>
-        <Card.Body>
-          <Card.Title>{image.title}</Card.Title>
-        </Card.Body>
+        {!img && (
+          <Card.Body>
+            <Card.Title>{image.label}</Card.Title>
+            <Card.Text>{image.desc}</Card.Text>
+          </Card.Body>
+        )}
       </Card>
     </Col>
   ));
@@ -40,6 +45,6 @@ const CardPanel = ({ images }: Props): JSX.Element => {
       </Row>
     </Container>
   );
-}
+};
 
 export default CardPanel;

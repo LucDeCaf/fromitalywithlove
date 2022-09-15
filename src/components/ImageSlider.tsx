@@ -4,12 +4,8 @@ import Image from "next/image";
 import { nanoid } from "nanoid";
 import styles from "../styles/ImageSlider.module.scss";
 
-interface ImageType {
-  src: string;
-}
-
 interface Props {
-  images: ImageType[];
+  images: { downloadUrl: string }[];
 }
 
 const ImageSlider = ({ images }: Props): JSX.Element => {
@@ -21,7 +17,7 @@ const ImageSlider = ({ images }: Props): JSX.Element => {
     <Carousel.Item key={nanoid()}>
       <Image
         className={styles.carouselItem}
-        src={image.src}
+        src={image.downloadUrl}
         alt="Image"
         layout="responsive"
         width={
@@ -36,8 +32,12 @@ const ImageSlider = ({ images }: Props): JSX.Element => {
     </Carousel.Item>
   ));
 
-  return <Carousel className="mb-4 border-top border-bottom border-secondary">{carouselItems}</Carousel>;
-}
+  return (
+    <Carousel className="mb-4 border-top border-bottom border-secondary">
+      {carouselItems}
+    </Carousel>
+  );
+};
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
