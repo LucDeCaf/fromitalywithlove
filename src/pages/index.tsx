@@ -1,5 +1,3 @@
-import { db } from "../utils/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import type { GetStaticProps } from "next";
 import Hr from "../components/Hr";
 import ImageSlider from "../components/ImageSlider";
@@ -10,8 +8,8 @@ interface PageProps {
   cardPanelImages: [];
 }
 
-function Home({ carouselImages, cardPanelImages }: PageProps) {
-  console.log(carouselImages);
+function Page({ carouselImages, cardPanelImages }: PageProps) {
+  console.log(cardPanelImages);
   return (
     <main>
       <h1 className="text-center text-info display-3 font-weight-bold cursive">
@@ -25,30 +23,22 @@ function Home({ carouselImages, cardPanelImages }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const dbInstance = collection(db, "images");
+  const res = await fetch("http://localhost:3000/api/get/images");
+  const data = await res.json();
+  if (data.success === false) throw Error;
+  const images = data.data;
 
-  // Query for carousel images
-  const carouselQuery = query(
-    dbInstance,
-    where("categories", "array-contains", "carousel")
+  const carouselImages = images.filter((doc) =>
+    doc.categories.includes("carousel")
   );
-  const carouselImages = await getDocs(carouselQuery);
-  const carouselImageDocs = carouselImages.docs.map((doc) => doc.data());
-
-  // Query for card panel images
-  const cardPanelQuery = query(
-    dbInstance,
-    where("categories", "array-contains", "food")
-  );
-  const cardPanelImages = await getDocs(cardPanelQuery);
-  const cardPanelImageDocs = cardPanelImages.docs.map((doc) => doc.data());
+  const cardPanelImages = images.filter((doc) => doc.categories.includes("food"));
 
   return {
     props: {
-      carouselImages: carouselImageDocs,
-      cardPanelImages: cardPanelImageDocs,
+      carouselImages: carouselImages,
+      cardPanelImages: cardPanelImages,
     },
   };
 };
 
-export default Home;
+export default Page;

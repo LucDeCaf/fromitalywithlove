@@ -43,7 +43,7 @@ const Page = () => {
             desc: imageDesc,
             categories: categories,
             downloadUrl: downloadURL,
-          }).then((res) => setShowAlert(true));
+          }).then((reference) => setShowAlert(true));
         })
       );
     }
