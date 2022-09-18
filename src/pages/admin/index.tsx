@@ -27,7 +27,11 @@ const Page = ({ images }: { images: ImageType[] }) => {
                 <Accordion.Body>
                   Description: &quot;{image.desc}&quot;
                   <br />
-                  <Link href={editLink}><a>Edit image {image.id}</a></Link>
+                  Image: <a href={image.downloadUrl}>{image.downloadUrl}</a>
+                  <br />
+                  <Link href={editLink}>
+                    <a>Edit image {image.id}</a>
+                  </Link>
                 </Accordion.Body>
               </Accordion.Item>
             );
