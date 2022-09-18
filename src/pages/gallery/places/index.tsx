@@ -12,11 +12,18 @@ const Page = ({ images }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://fromitalywithlove.vercel.app/api/get/images");
-  const data = await res.json();
-  if (data.success === false) throw Error;
+  let images = [];
+  try {
+    const res = await fetch(
+      "https://fromitalywithlove.vercel.app/api/get/images"
+    );
+    const data = await res.json();
+    if (data.success === false) throw Error(data.message);
 
-  const images = await data.data.filter(image => image.categories.includes("places"));
+    images = await data.data;
+  } catch (err) {
+    console.error(err.message);
+  }
 
   return {
     props: {
