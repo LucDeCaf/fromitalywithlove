@@ -1,6 +1,7 @@
 import Heading from "../../../components/Heading";
 import CardPanel from "../../../components/CardPanel";
 import { GetStaticProps } from "next";
+import { pid } from "process";
 
 export default function Page({ pageId, images }) {
   // Capitalize the first letter in the page title
@@ -27,17 +28,23 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const pid = params.id;
-  const res = await fetch("https://fromitalywithlove.vercel.app/api/get/images");
-  const data = await res.json();
-  if (data.success === false) throw Error;
+  let images = [];
+  try {
+    const res = await fetch(
+      "https://fromitalywithlove.vercel.app/api/get/images"
+    );
+    const data = await res.json();
+    if (data.success === false) throw Error(data.message);
 
-  const images = data.data.filter((image) => image.categories.includes(pid));
+    images = await data.data;
+  } catch (err) {
+    console.error(err.message);
+  }
 
   return {
     props: {
-      pageId: pid,
+      pageId: params.id,
       images: images,
     },
   };
-}
+};
