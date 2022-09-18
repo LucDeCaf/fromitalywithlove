@@ -18,7 +18,7 @@ const handler: NextApiHandler<Response> = async (req, res) => {
   try {
     const dbInstance = collection(db, "images");
     const images = await getDocs(dbInstance);
-    const data = images.docs.map((doc) => doc.data());
+    const data = images.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
     return res.status(200).json({ success: true, data: data });
   } catch (err) {
