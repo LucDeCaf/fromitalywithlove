@@ -22,28 +22,27 @@ function Page({ carouselImages, cardPanelImages }: PageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  let carouselImages = [];
-  let cardPanelImages = [];
-  try {
-    const res = await fetch(
-      "https://fromitalywithlove.vercel.app/api/get/images"
-    );
-    const data = await res.json();
-    if (data.success === false) throw Error(data.message);
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch(
+    "https://fromitalywithlove.vercel.app/api/get/images"
+  );
+  const data = await res.json();
+  if (data.success === false) throw new Error(`Error: ${data.message}`);
+  const images = data.data;
 
-    const images = await data.data;
-    carouselImages = images.filter(image => image.categories.includes("carousel"));
-    cardPanelImages = images.filter(image => image.categories.includes("food"));
-  } catch (err) {
-    console.error(err.message);
-  }
+  const carouselImages = images.filter((doc) =>
+    doc.categories.includes("carousel")
+  );
+  const cardPanelImages = images.filter((doc) =>
+    doc.categories.includes("food")
+  );
 
   return {
     props: {
       carouselImages: carouselImages,
       cardPanelImages: cardPanelImages,
     },
+    revalidate: 10,
   };
 };
 

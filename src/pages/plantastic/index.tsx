@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import Image from "next/image";
 import { nanoid } from "nanoid";
+import { NextPage } from "next";
 
 const Photo = ({ title, src }: { title: string; src: string }): JSX.Element => {
   return (
@@ -22,7 +23,7 @@ const Photo = ({ title, src }: { title: string; src: string }): JSX.Element => {
   );
 };
 
-export default function Page() {
+const Page: NextPage = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.MAPS_API_KEY!,
   });
@@ -82,4 +83,6 @@ export default function Page() {
       </Container>
     </main>
   );
-}
+};
+
+export default Page;
