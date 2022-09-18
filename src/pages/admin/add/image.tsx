@@ -1,12 +1,13 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-import { collection, addDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../../../utils/firebase";
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const Page = () => {
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [status, setStatus] = useState("loading");
 
   const [imageLabel, setImageLabel] = useState("");
   const [imageDesc, setImageDesc] = useState("");
@@ -25,40 +26,86 @@ const Page = () => {
     setCategories(newCategories);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+    setShowAlert(true);
+
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      const file = e.target[0].files[0];
-      const storageRef = ref(
-        storage,
-        `images/${imageLabel.toLowerCase().replaceAll(" ", "-")}`
-      );
-      uploadBytes(storageRef, file).then((snapshot) =>
-        getDownloadURL(snapshot.ref).then((downloadURL) => {
-          const dbInstance = collection(db, "images");
-          addDoc(dbInstance, {
+      try {
+        const file = e.target[0].files[0];
+        const imageId = imageLabel.toLowerCase().replaceAll(" ", "-");
+
+        const docRef = doc(db, "images", imageId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setStatus("exists");
+          e.stopPropagation();
+        } else {
+          const imageRef = ref(storage, `images/${imageId}`);
+          const imageSnap = await uploadBytes(imageRef, file);
+          const downloadUrl = await getDownloadURL(imageSnap.ref);
+
+          await setDoc(docRef, {
             label: imageLabel,
             desc: imageDesc,
             categories: categories,
-            downloadUrl: downloadURL,
-          }).then((reference) => setShowAlert(true));
-        })
-      );
+            downloadUrl: downloadUrl,
+          });
+
+          setStatus("success");
+          console.log(`Document saved at "${docRef.path}"`);
+        }
+      } catch (err) {
+        setStatus("fail");
+        console.error(err.message);
+      }
     }
 
     setValidated(true);
-    e.preventDefault();
   };
 
   return (
     <main>
       <Container>
-        <Alert show={showAlert} variant="success">
-          <Alert.Heading>Great!</Alert.Heading>
-          <hr />
-          <p className="mb-0">You uploaded an image!</p>
+        <Alert
+          show={showAlert}
+          variant={
+            status === "success"
+              ? "success"
+              : status === "fail"
+              ? "danger"
+              : "warning"
+          }
+        >
+          <Alert.Heading className={status === "loading" ? "mb-0" : ""}>
+            {status === "success"
+              ? "Great!"
+              : status === "fail"
+              ? "Oh no..."
+              : status === "loading"
+              ? "Loading..."
+              : status === "exists"
+              ? "Oops!"
+              : "Hmm..."}
+          </Alert.Heading>
+          {status !== "loading" && (
+            <>
+              <hr />
+              <p className="mb-0">
+                {status === "success"
+                  ? "You uploaded an image!"
+                  : status === "fail"
+                  ? "Something went wrong. Please make sure you are connected to the internet."
+                  : status === "exists"
+                  ? "It appears an image with that name already exists. Please check that you aren't re-uploading the same image twice!"
+                  : "Something weird happened. We'll get back to you"}
+              </p>
+            </>
+          )}
         </Alert>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-1">
@@ -125,7 +172,7 @@ const Page = () => {
               onChange={handleCategoryChange}
             />
           </Form.Group>
-          <Button variant="light" type="submit">
+          <Button variant="light" type="submit" className="mb-3">
             Submit
           </Button>
         </Form>
