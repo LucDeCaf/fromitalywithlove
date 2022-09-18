@@ -1,7 +1,6 @@
 import Heading from "../../../components/Heading";
 import CardPanel from "../../../components/CardPanel";
-import { GetStaticProps } from "next";
-import { pid } from "process";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 export default function Page({ pageId, images }) {
   // Capitalize the first letter in the page title
@@ -15,7 +14,7 @@ export default function Page({ pageId, images }) {
   );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
       { params: { id: "pasta" } },
@@ -27,23 +26,17 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let images = [];
-  try {
-    const res = await fetch(
-      "https://fromitalywithlove.vercel.app/api/get/images"
-    );
-    const data = await res.json();
-    if (data.success === false) throw Error(data.message);
+export const getStaticProps: GetStaticProps = async (context) => {
+  const res = await fetch(
+    "https://fromitalywithlove.vercel.app/api/get/images"
+  );
+  const data = await res.json();
+  if (data.success === false) throw Error(data.message);
 
-    images = await data.data;
-  } catch (err) {
-    console.error(err.message);
-  }
+  const images = await data.data;
 
   return {
     props: {
-      pageId: params.id,
       images: images,
     },
     revalidate: 10,
