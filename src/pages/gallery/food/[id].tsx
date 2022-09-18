@@ -46,5 +46,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       pageId: params.id,
       images: images,
     },
+    revalidate: 10,
   };
 };
