@@ -23,7 +23,7 @@ function Page({ carouselImages, cardPanelImages }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/get/images");
+  const res = await fetch("https://fromitalywithlove.vercel.app/api/get/images");
   const data = await res.json();
   if (data.success === false) throw Error;
   const images = data.data;
