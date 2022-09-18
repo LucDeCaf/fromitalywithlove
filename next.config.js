@@ -4,7 +4,11 @@ const nextConfig = {
   swcMinify: true,
   env: {
     MAPS_API_KEY: process.env.MAPS_API_KEY,
+    FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
   },
-}
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
