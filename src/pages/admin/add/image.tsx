@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEventHandler } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { db, storage } from "../../../utils/firebase";
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
@@ -13,7 +13,7 @@ const Page = () => {
   const [imageDesc, setImageDesc] = useState("");
   const [categories, setCategories] = useState([]);
 
-  const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCategoryChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = e.target.value;
     const newCategories = Array.from(categories);
 
@@ -146,7 +146,7 @@ const Page = () => {
               value="places"
               onChange={handleCategoryChange}
             />
-            <hr className="my-3" />
+            <hr className="my-2" />
             <Form.Check
               type="checkbox"
               label="Pasta"
@@ -169,6 +169,13 @@ const Page = () => {
               type="checkbox"
               label="Fruit"
               value="fruit"
+              onChange={handleCategoryChange}
+            />
+            <hr className="my-2" />
+            <Form.Check
+              type="checkbox"
+              label="Carousel"
+              value="carousel"
               onChange={handleCategoryChange}
             />
           </Form.Group>
